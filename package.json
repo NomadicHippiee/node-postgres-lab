@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch app.js",
-    "seed": "node populatedb.js"
+    "seed": "node db/populatedb.js"
   },
   "repository": {
     "type": "git",
