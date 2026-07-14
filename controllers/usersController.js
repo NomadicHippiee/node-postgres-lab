@@ -17,3 +17,12 @@ exports.createUsernamePost = async (req, res) => {
     await db.insertUsername(username);
     res.redirect("/");
 };
+
+exports.deleteAllUsernames = async (req, res) => {
+    if (req.query.confirm === "true") {
+        await db.deleteAllUsernames();
+        res.send("All usernames deleted successfully");
+    } else {
+        res.send("Confirmation required. Add ?confirm=true to delete all usernames");
+    }
+};
