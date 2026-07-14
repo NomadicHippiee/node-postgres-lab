@@ -1,13 +1,17 @@
-exports.logUsernames = (req, res) => {
-    console.log("Usernames will be logged here - wip");
-    res.render("index", { title: "All usernames" });
+const db = require("../db/queries");
+
+exports.logUsernames = async (req, res) => {
+    const usernames = await db.getAllUsernames();
+    console.log("Usernames: ", usernames);
+    res.send("Usernames: " + usernames.map(user => user.username).join(", "));
 };
 
 exports.createUsernameGet = (req, res) => {
     res.render("newUser", { title: "Create new username"})
 };
 
-exports.createUsernamePost = (req, res) => {
-    console.log("Username to be saved: ", req.body.username);
+exports.createUsernamePost = async (req, res) => {
+    const { username } = req.body;
+    await db.insertUsername(username);
     res.redirect("/");
 };
